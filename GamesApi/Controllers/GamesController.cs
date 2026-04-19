@@ -12,6 +12,12 @@ public class GamesController : ControllerBase {
     public ActionResult<List<Game>> GetAll() {
         return Ok(GamesStore.Games);
     }
+    // Метод 2 — GET /api/games/favourites (получить избранные игры)
+    [HttpGet("favourites")]
+    public ActionResult<List<Game>> GetFavourites() {
+        var favourites = GamesStore.Games.Where(g => g.IsFavourite).ToList();
+        return Ok(favourites);
+    }
     // Метод 2 — GET /api/games/{id} (получить одну игру)
     [HttpGet("{id}")]
     public ActionResult<Game> GetById(int id) {
