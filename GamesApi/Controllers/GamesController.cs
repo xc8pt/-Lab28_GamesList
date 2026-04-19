@@ -51,6 +51,9 @@ public class GamesController : ControllerBase {
         if (game is null) {
             return NotFound(new { message = $"Игра с id = {id} не найдена" });
         }
+        if (string.IsNullOrWhiteSpace(updated.Title)) {
+            return BadRequest(new { message = "Название игры не может быть пустым" });
+        }
         game.Title = updated.Title;
         game.Genre = updated.Genre;
         game.ReleaseYear = updated.ReleaseYear;
